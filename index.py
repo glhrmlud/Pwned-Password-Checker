@@ -36,7 +36,6 @@ def main():
   hash_hex = hash_password(password)
   prefix, sufix = slice_hash(hash_hex)
   response, error = get_leaks(prefix)
-  print(response)
   if not response:
     print(f'Erro ao consultar senhas vazadas.Erro:{error}. Por favor tente novamente mais tarde')
     return
