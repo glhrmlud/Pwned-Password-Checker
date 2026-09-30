@@ -13,11 +13,11 @@ def slice_hash(hash):
 
 def get_leaks(prefix):
   try:
-    url = f'https://api.pwnedpasswords.com/range/{prefix}'
+    url = f"https://api.pwnedpasswords.com/range/{prefix}"
     response = requests.get(url, timeout=5)
-    if response.status_code == '200':
+    if response.status_code == 200:
       return response.text, None
-    if response.status_code == '429':
+    if response.status_code == 429:
       return None, 'rate_limit'
     else:
       return None, f'status_{response.status_code}'
@@ -36,6 +36,7 @@ def main():
   hash_hex = hash_password(password)
   prefix, sufix = slice_hash(hash_hex)
   response, error = get_leaks(prefix)
+  print(response)
   if not response:
     print(f'Erro ao consultar senhas vazadas.Erro:{error}. Por favor tente novamente mais tarde')
     return
